@@ -18,13 +18,37 @@ const db = new sqlite3.Database(sqlitePath);
 
 const employees = [
   {
-    full_name: 'John Doe'
+    full_name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone_number: '123-456-7890',
+    date_of_birth: '1990-01-01',
+    job_title: 'Software Engineer',
+    department: 'Engineering',
+    salary: 60000,
+    start_date: '2020-01-01',
+    end_date: null
   },
   {
-    full_name: 'Jane Smith'
+    full_name: 'Jane Smith',
+    email: 'jane.smith@example.com',
+    phone_number: '987-654-3210',
+    date_of_birth: '1985-05-15',
+    job_title: 'Product Manager',
+    department: 'Product',
+    salary: 80000,
+    start_date: '2018-03-01',
+    end_date: null
   },
   {
-    full_name: 'Alice Johnson'
+    full_name: 'Alice Johnson',
+    email: 'alice.johnson@example.com',
+    phone_number: '555-555-5555',
+    date_of_birth: '1992-07-20',
+    job_title: 'Designer',
+    department: 'Design',
+    salary: 50000,
+    start_date: '2019-06-15',
+    end_date: null
   },
 ];
 
@@ -33,16 +57,19 @@ const timesheets = [
     employee_id: 1,
     start_time: '2025-02-10 08:00:00',
     end_time: '2025-02-10 17:00:00',
+    summary: 'Worked on project'
   },
   {
     employee_id: 2,
     start_time: '2025-02-11 12:00:00',
     end_time: '2025-02-11 17:00:00',
+    summary: 'Meeting with clients'
   },
   {
     employee_id: 3,
     start_time: '2025-02-12 07:00:00',
     end_time: '2025-02-12 16:00:00',
+    summary: 'Design review'
   },
 ];
 
@@ -61,6 +88,9 @@ const insertData = (table, data) => {
 };
 
 db.serialize(() => {
+  db.run('DELETE FROM employees');
+  db.run('DELETE FROM timesheets');
+  
   insertData('employees', employees);
   insertData('timesheets', timesheets);
 });
